@@ -20,6 +20,22 @@ public class UserController
         return userRepository.findAll();
     }
 
+    @GetMapping("/userById/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(
+                    () -> new RuntimeException("User not found with id " + id)
+        );
+    }
+
+    @GetMapping("/userByName/{name}")
+    public User getUserByName(@PathVariable String name) {
+        return userRepository.findByName(name)
+                .orElseThrow(
+                        () -> new RuntimeException("User not found with name " + name)
+                );
+    }
+
     @PostMapping("/create")
     public @ResponseBody String createUser(@RequestParam String name,
                                      @RequestParam String email) {
@@ -29,4 +45,5 @@ public class UserController
         userRepository.save(n);
         return "User created";
     }
+
 }
