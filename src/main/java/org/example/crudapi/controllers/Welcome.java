@@ -9,4 +9,8 @@ public class Welcome {
     public String welcome() {
         return "CRUD API using Spring Boot, Hibernate, JPA, and MySQL";
     }
+    @GetMapping("/secured")
+    public String secured() {
+        return "Secured endpoint using OAuth2";
+    }
 }

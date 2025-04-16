@@ -46,4 +46,16 @@ public class UserController
         return "User created";
     }
 
+    @PatchMapping("/update/{name}")
+    public @ResponseBody String updateUser(@PathVariable String name,
+                                     @RequestParam String email) {
+        User n = userRepository.findByName(name)
+                .orElseThrow(
+                        () -> new RuntimeException("User not found with name " + name)
+                );
+        n.setEmail(email);
+        userRepository.save(n);
+        return "User updated";
+    }
+
 }
